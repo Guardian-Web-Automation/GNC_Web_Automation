@@ -1,0 +1,45 @@
+name: GNC Web Sanity Automation
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM IST (2:30 AM UTC)
+    - cron: '30 3 * * *'
+
+  workflow_dispatch:   # allows manual trigger also
+
+jobs:
+  automation-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Maven Tests
+        env:
+          TZ: Asia/Kolkata
+        run: mvn clean test -Dheadless=true
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Extent-Automation-Report
+          path: reports/
+
+      - name: Notify Slack
+        if: always()
+        run: |
+          curl -X POST -H "Content-type: application/json" \
+          --data "{
+            \"text\": \"🚀 *GNC Web Automation Run Completed*\n\n*Status:* ${{ job.status }}\n*Repo:* ${{ github.repository }}\n*Run URL:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Extent Report:* Download from Artifacts section\"
+          }" ${{ secrets.SLACK_WEBHOOK_URL }}
+      
+
+      
