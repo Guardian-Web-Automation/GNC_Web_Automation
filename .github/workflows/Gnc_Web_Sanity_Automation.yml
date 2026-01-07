@@ -39,7 +39,7 @@ jobs:
           curl -X POST -H "Content-type: application/json" \
           --data "{
             \"text\": \"🚀 *GNC Web Automation Run Completed*\n\n*Status:* ${{ job.status }}\n*Repo:* ${{ github.repository }}\n*Run URL:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Extent Report:* Download from Artifacts section\"
-          }" ${{ secrets.SLACK_WEBHOOK_URL }}
+          }" ${{ secrets.SLACK_WEBHOOK_URL01 }}
       
 
       

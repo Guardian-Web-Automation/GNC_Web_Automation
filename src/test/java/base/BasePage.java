@@ -39,10 +39,11 @@ public abstract class BasePage {
         while (attempts < RETRY_COUNT) {
             try {
                 WebElement el = wait.until(ExpectedConditions.elementToBeClickable(locator));
+                scrollToElement(driver,el);
                 el.click();
                 return;
             } catch (Exception e) {
-                LOGGER.warn("Click attempt {} failed for {}: {}", attempts + 1, locator, e.getMessage());
+//                LOGGER.warn("Click attempt {} failed for {}: {}", attempts + 1, locator, e.getMessage());
                 try {
                     Thread.sleep(RETRY_DELAY_MS);
                 } catch (InterruptedException ignored) {}

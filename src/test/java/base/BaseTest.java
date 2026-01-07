@@ -77,7 +77,7 @@ public class BaseTest {
         if(driver!=null){
             // ensure browser is closed after each test
             try {
-                driver.quit();
+//                driver.quit();
             } catch (Exception e) {
                 LOGGER.warn("Error quitting WebDriver: {}", e.getMessage());
             }
