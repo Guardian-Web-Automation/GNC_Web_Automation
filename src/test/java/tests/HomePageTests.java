@@ -32,30 +32,27 @@ public class HomePageTests extends BaseTest {
         String size = "2"; // sample size text
         String flavour = "Mawa Kulfi"; // sample flavour
         int qty = 2;
-//
+
         pdp.selectSeries(series);
         pdp.selectSize(size);
         pdp.selectFlavour(flavour);
-//
+
         // 4. add quantity
         pdp.setQuantity(qty);
-//
+
 //        // 5. click add to cart
         pdp.clickAddToCart();
-//
+
 //        // 6. verify cart
         CartPage cart = new CartPage(driver);
         String cartName = cart.getProductNameInCart();
         int cartQty = cart.getProductQuantityInCart();
-//
+
         Assert.assertTrue(cartName.contains(productName) || cartName.toLowerCase().contains("whey protein"), "Product name in cart does not match expected. Found: "+cartName);
         Assert.assertEquals(cartQty, qty, "Cart quantity mismatch");
-//
+
 //        // 7. click checkout and assert on checkout page
         cart.clickCheckout();
-//        // Reuse cart assertions - many checkouts display the same cart summary; for simplicity check page still contains product
-//        Assert.assertTrue(driver.getPageSource().toLowerCase().contains("whey") || driver.getPageSource().toLowerCase().contains("protein"), "Checkout page does not contain product info");
 //
-//        ExtentLogger.pass("Add to cart -> Checkout validated for product: " + productName + " qty: " + qty);
     }
 }

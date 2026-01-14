@@ -2,8 +2,10 @@ name: GNC Web Sanity Automation
 
 on:
   schedule:
-    # Runs every day at 8:00 AM IST (2:30 AM UTC)
+    # Runs every day at 9:00 AM IST (2:30 AM UTC)
     - cron: '30 3 * * *'
+    # Runs daily at 8:00 PM IST (14:30 UTC)
+    - cron: '30 14 * * *'
 
   workflow_dispatch:   # allows manual trigger also
 
